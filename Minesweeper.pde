@@ -4,7 +4,7 @@ import de.bezier.guido.*;
 public int NUM_ROWS = 20;
 public int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
-private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
+private ArrayList <MSButton> bombs = new ArrayList<MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
 
 void setup ()
@@ -17,18 +17,27 @@ void setup ()
     
     //your code to declare and initialize buttons goes here
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
-   for (int i = 0; i < NUM_ROWS; i++)
+   for (int row = 0; row < NUM_ROWS; row++)
    {
-       for (int j = 0; j < NUM_COLS; j++)
+       for (int col = 0; col < NUM_COLS; col++)
        {
-           buttons[i][j] = new MSButton(i, j);
+           buttons[row][col] = new MSButton(row, col);
        }
    }  
     setBombs();
 }
 public void setBombs()
 {
-    //your code
+   for(int i = 0; i < 20; i++) 
+   {
+       int row = (int)(Math.random()*20);
+       int col = (int)(Math.random()*20);
+       if(!bombs.contains(buttons[row][col]))
+       {
+           bombs.add(buttons[row][col]);
+       }
+    }
+
 }
 
 public void draw ()
@@ -83,15 +92,17 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
+        
         //your code here
+
     }
 
     public void draw () 
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+         else if( clicked && bombs.contains(this) ) 
+             fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
@@ -107,13 +118,47 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        //your code here
+        if((c <= 19 && c >= 0) && (r >= 0 && r <= 19))
+     return true;
+    
         return false;
     }
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
         //your code here
+        if(isValid(row+1,col) && bombs.contains(buttons[row+1][col]))
+        {
+            numBombs++;
+        }
+        if(isValid(row-1,col) && bombs.contains(buttons[row-1][col]))
+        {
+            numBombs++;
+        }
+        if(isValid(row,col+1) && bombs.contains(buttons[row][col+1]))
+        {
+            numBombs++;
+        }
+        if(isValid(row,col-1) && bombs.contains(buttons[row][col-1]))
+        {
+            numBombs++;
+        }
+        if(isValid(row+1,col+1) && bombs.contains(buttons[row+1][col+1]))
+        {
+            numBombs++;
+        }
+        if(isValid(row+1,col-1) && bombs.contains(buttons[row+1][col-1]))
+        {
+            numBombs++;
+        }
+        if(isValid(row-1,col-1) && bombs.contains(buttons[row-1][col-1]))
+        {
+            numBombs++;
+        }
+        if(isValid(row-1,col+1) && bombs.contains(buttons[row-1][col+1]))
+        {
+            numBombs++;
+        }
         return numBombs;
     }
 }
