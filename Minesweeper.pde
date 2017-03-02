@@ -28,7 +28,7 @@ void setup ()
 }
 public void setBombs()
 {
-   for(int i = 0; i < 20; i++) 
+   for(int i = 0; i < 3; i++) 
    {
        int row = (int)(Math.random()*20);
        int col = (int)(Math.random()*20);
@@ -91,8 +91,38 @@ public class MSButton
     
     public void mousePressed () 
     {
+        if(mouseButton == LEFT && !marked)
         clicked = true;
-        
+       
+        if(mouseButton == RIGHT)
+            marked = !marked;
+
+        if(marked == false)
+            clicked = false;
+        else if(bombs.contains(this))
+            displayLosingMessage();
+        else if (countBombs(r, c)>0)
+            label = " " +countBombs(r,c);
+        else
+        {
+            if(isValid(r,c-1) && !buttons[r][c-1].isClicked())
+            buttons[r][c-1].mousePressed();
+           if(isValid(r,c+1) && !buttons[r][c+1].isClicked())
+            buttons[r][c+1].mousePressed();
+           if(isValid(r-1,c) && !buttons[r-1][c].isClicked())
+            buttons[r-1][c].mousePressed();
+           if(isValid(r+1,c) && !buttons[r+1][c].isClicked())
+            buttons[r+1][c].mousePressed();
+            
+           if(isValid(r+1,c-1) && !buttons[r+1][c-1].isClicked())
+            buttons[r+1][c-1].mousePressed();
+           if(isValid(r+1,c+1) && !buttons[r+1][c+1].isClicked())
+            buttons[r+1][c+1].mousePressed();
+           if(isValid(r-1,c-1) && !buttons[r-1][c-1].isClicked())
+            buttons[r-1][c-1].mousePressed();
+           if(isValid(r-1,c+1) && !buttons[r-1][c+1].isClicked())
+            buttons[r-1][c+1].mousePressed();
+        }
         //your code here
 
     }
