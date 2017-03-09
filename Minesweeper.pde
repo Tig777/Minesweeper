@@ -48,12 +48,14 @@ public boolean isWon()
     //your code here
    for(int i = 0;i < NUM_ROWS;i++){
        for(int j = 0;j < NUM_COLS;j++){
-           if(!buttons[i][j].isClicked()==true&&!bombs.contains(buttons[i][j])){
+           if(!buttons[i][j].isClicked()==true&&!bombs.contains(buttons[i][j]))
+           {
                return false;
            }
        }
    }
    return true;
+
 }
 public void displayLosingMessage()
 {
@@ -63,6 +65,12 @@ public void displayLosingMessage()
            {
                buttons[i][j].marked=false;
                buttons[i][j].clicked=true;
+                   buttons[10][0].setLabel(" ");
+                   buttons[10][1].setLabel(" ");
+                   buttons[10][2].setLabel(" ");
+                   buttons[10][3].setLabel(" ");
+                   buttons[10][4].setLabel(" ");
+                   buttons[10][5].setLabel(" ");
                    buttons[10][6].setLabel("Y");
                    buttons[10][7].setLabel("O");
                    buttons[10][8].setLabel("U");
@@ -70,13 +78,20 @@ public void displayLosingMessage()
                    buttons[10][10].setLabel("L");
                    buttons[10][11].setLabel("O");
                    buttons[10][12].setLabel("S");
-                   buttons[10][13].setLabel("E");      
+                   buttons[10][13].setLabel("E");
+                   buttons[10][14].setLabel(" ");
+                   buttons[10][15].setLabel(" ");
+                   buttons[10][16].setLabel(" ");
+                   buttons[10][17].setLabel(" ");
+                   buttons[10][18].setLabel(" ");
+                   buttons[10][19].setLabel(" ");      
            }
        }
    }
 }
 public void displayWinningMessage()
 {
+    buttons[10][0].setLabel(" ");
     buttons[10][1].setLabel("C");
     buttons[10][2].setLabel("O");
     buttons[10][3].setLabel("N");
@@ -95,6 +110,7 @@ public void displayWinningMessage()
     buttons[10][16].setLabel("I");
     buttons[10][17].setLabel("N");
     buttons[10][18].setLabel("!");
+    buttons[10][19].setLabel(" "); 
 }
 public class MSButton
 {
